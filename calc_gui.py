@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 class Ui_MainWindow(object):
     
+       
+    
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(344, 600)
@@ -134,24 +136,37 @@ class Ui_MainWindow(object):
         self.checkBox_BIN = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_BIN.setGeometry(QtCore.QRect(10, 170, 70, 17))
         self.checkBox_BIN.setObjectName("checkBox_BIN")
-        #self.checkBox_BIN.stateChanged.connect(self.uncheck)
+       
 
         self.checkBox_OCT = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_OCT.setGeometry(QtCore.QRect(10, 140, 81, 21))
         self.checkBox_OCT.setObjectName("checkBox_OCT")
-        #self.checkBox_OCT.stateChanged.connect(self.uncheck)
-
+        
         self.checkBox_DEC = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_DEC.setGeometry(QtCore.QRect(10, 110, 81, 21))
         self.checkBox_DEC.setObjectName("checkBox_DEC")
         self.checkBox_DEC.setChecked(True)
-        #self.checkBox_DEC.stateChanged.connect(self.uncheck)
+        
 
         self.checkBox_HEX = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_HEX.setGeometry(QtCore.QRect(10, 80, 71, 20))
         self.checkBox_HEX.setObjectName("checkBox_HEX")
-        #self.checkBox_HEX.stateChanged.connect(self.uncheck)
+        
 
+
+
+        self.bg = QButtonGroup()   
+        self.bg.addButton(self.checkBox_BIN,1)
+        self.bg.addButton(self.checkBox_OCT,2)
+        self.bg.addButton(self.checkBox_DEC,3)
+        self.bg.addButton(self.checkBox_HEX,4)
+
+
+
+
+        self.bg.buttonClicked.connect(self.slot)
+        
+        
         self.Display = QtWidgets.QLabel(self.centralwidget)
         self.Display.setGeometry(QtCore.QRect(80, 30, 241, 91))
         self.Display.setObjectName("Display")
@@ -167,60 +182,123 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.set_calc_for_dec()
+        self.set_calc_letters_bin_dec_oct()
+        self.connect_buttons()
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
 
-    def set_calc_for_dec(self):
+    def set_calc_letters_bin_dec_oct(self):
         self.pushButton_A.setEnabled(False)
         self.pushButton_B.setEnabled(False)
         self.pushButton_C.setEnabled(False)
         self.pushButton_D.setEnabled(False)
         self.pushButton_E.setEnabled(False)
         self.pushButton_F.setEnabled(False)
+    def set_calc_letters_hex(self):
+        self.pushButton_A.setEnabled(True)
+        self.pushButton_B.setEnabled(True)
+        self.pushButton_C.setEnabled(True)
+        self.pushButton_D.setEnabled(True)
+        self.pushButton_E.setEnabled(True)
+        self.pushButton_F.setEnabled(True)
+
+    def set_calc_digits_bin(self):
+        self.pushButton_0.setEnabled(True)
+        self.pushButton_1.setEnabled(True)
+        self.pushButton_2.setEnabled(False)
+        self.pushButton_3.setEnabled(False)
+        self.pushButton_4.setEnabled(False)
+        self.pushButton_5.setEnabled(False)
+        self.pushButton_6.setEnabled(False)
+        self.pushButton_7.setEnabled(False)
+        self.pushButton_8.setEnabled(False)
+        self.pushButton_9.setEnabled(False)
+    
+    def set_calc_digits_oct(self):
+        self.pushButton_0.setEnabled(True)
+        self.pushButton_1.setEnabled(True)
+        self.pushButton_2.setEnabled(True)
+        self.pushButton_3.setEnabled(True)
+        self.pushButton_4.setEnabled(True)
+        self.pushButton_5.setEnabled(True)
+        self.pushButton_6.setEnabled(True)
+        self.pushButton_7.setEnabled(True)
+        self.pushButton_8.setEnabled(False)
+        self.pushButton_9.setEnabled(False)
+
+    def set_calc_digits_dec(self):
+        self.pushButton_0.setEnabled(True)
+        self.pushButton_1.setEnabled(True)
+        self.pushButton_2.setEnabled(True)
+        self.pushButton_3.setEnabled(True)
+        self.pushButton_4.setEnabled(True)
+        self.pushButton_5.setEnabled(True)
+        self.pushButton_6.setEnabled(True)
+        self.pushButton_7.setEnabled(True)
+        self.pushButton_8.setEnabled(True)
+        self.pushButton_9.setEnabled(True)
+            
+    def slot(self,object):
+        if self.bg.id(object)==1:
+            self.set_calc_letters_bin_dec_oct()
+            self.set_calc_digits_bin()
+        elif self.bg.id(object)==2:
+            self.set_calc_letters_bin_dec_oct()
+            self.set_calc_digits_oct()
+
+        elif self.bg.id(object)==3:
+            self.set_calc_letters_bin_dec_oct()
+            self.set_calc_digits_dec()
+
+        elif self.bg.id(object)==4:
+            self.set_calc_letters_hex()
+            self.set_calc_digits_dec()
 
     
-    
+    def clicked_0(self):
+        
+        self.Display.setText(self.get_display_value()+'0')
+    def clicked_1(self):
+        self.Display.setText(self.get_display_value()+'1')
+    def clicked_2(self):
+        self.Display.setText(self.get_display_value()+'2')
+    def clicked_3(self):
+        self.Display.setText(self.get_display_value()+'3')
+    def clicked_4(self):
+        self.Display.setText(self.get_display_value()+'4')
+    def clicked_5(self):
+        self.Display.setText(self.get_display_value()+'5')
+    def clicked_6(self):
+        self.Display.setText(self.get_display_value()+'6')
+    def clicked_7(self):
+        self.Display.setText(self.get_display_value()+'7')
+    def clicked_8(self):
+        self.Display.setText(self.get_display_value()+'8')
+    def clicked_9(self):
+        self.Display.setText(self.get_display_value()+'9')
 
+    def clicked_Clear(self):
+        self.Display.setText('')
 
-    # def uncheck(self, state):
-  
-    #     # checking if state is checked
-    #     if state == Qt.Checked:
-  
-    #         # if first check box is selected
-    #         if self.sender() == self.self.checkBox_BIN:
-  
-    #             # making other check box to uncheck
-    #             self.checkBox_OCT.setChecked(False)
-    #             self.checkBox_DEC.setChecked(False)
-    #             self.checkBox_HEX.setChecked(True)
-  
-    #         # if second check box is selected
-    #         elif self.sender() == self.checkBox_DEC:
-  
-    #             # making other check box to uncheck
-    #             self.checkBox_OCT.setChecked(False)
-    #             self.checkBox_BIN.setChecked(False)
-    #             self.checkBox_HEX.setChecked(True)
-  
-  
-    #         # if third check box is selected
-    #         elif self.sender() == self.checkBox_OCT:
-  
-    #             # making other check box to uncheck
-    #             self.checkBox_DEC.setChecked(False)
-    #             self.checkBox_BIN.setChecked(False)
-    #             self.checkBox_HEX.setChecked(True)
-    #         elif self.sender() == self.checkBox_HEX:
-  
-    #             # making other check box to uncheck
-    #             self.checkBox_DEC.setChecked(False)
-    #             self.checkBox_BIN.setChecked(False)
-    #             self.checkBox_OCT.setChecked(True)
+    def clicked_Del(self):
+        self.Display.setText(self.get_display_value()[:-1])
 
 
 
+
+    def connect_buttons(self):
+        self.pushButton_0.clicked.connect(self.clicked_0)
+        self.pushButton_1.clicked.connect(self.clicked_1)
+        self.pushButton_2.clicked.connect(self.clicked_2)
+        self.pushButton_3.clicked.connect(self.clicked_3)
+        self.pushButton_4.clicked.connect(self.clicked_4)
+        self.pushButton_5.clicked.connect(self.clicked_5)
+        self.pushButton_6.clicked.connect(self.clicked_6)
+        self.pushButton_7.clicked.connect(self.clicked_7)
+        self.pushButton_8.clicked.connect(self.clicked_8)
+        self.pushButton_9.clicked.connect(self.clicked_9)
+        self.pushButton_Clear.clicked.connect(self.clicked_Clear)
+        self.pushButton_Del.clicked.connect(self.clicked_Del)
     def retranslateUi(self,MainWindow):
 
         _translate = QtCore.QCoreApplication.translate
@@ -293,7 +371,7 @@ class Ui_MainWindow(object):
 
         self.checkBox_HEX.setText(_translate("MainWindow", "HEX"))
 
-        self.Display.setText(_translate("MainWindow", "0"))
+        self.Display.setText(_translate("MainWindow", ""))
 
                 # first decorate the getter method
     def get_display_value(self): # This getter method name is *the* name
