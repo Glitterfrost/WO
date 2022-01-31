@@ -306,7 +306,154 @@ class TestCalculator(unittest.TestCase):
         test_gui.clicked_Del()
         self.assertEqual(test_gui.get_display_value(),prev_string[:-1])
 
+    def test_input_leftBracket(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        test_gui.clicked_left_bracket()
+        self.assertEqual(test_gui.get_display_value()[-1],'(')
 
+
+    def test_input_rightBracket(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        test_gui.clicked_right_bracket()
+        self.assertEqual(test_gui.get_display_value()[-1],')')
+
+    def test_input_signChange(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        test_gui.Display.setText('32423423')
+        test_gui.clicked_sign_change()
+        self.assertEqual(test_gui.get_display_value()[0],'-')
+        test_gui.clicked_sign_change()
+        self.assertNotEqual(test_gui.get_display_value()[0],'-')
+
+
+    def test_input_Add_sign(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        test_gui.clicked_AddSign()
+        self.assertEqual(test_gui.get_display_value()[-1],'+')
+
+    def test_input_Minus_sign(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        test_gui.clicked_MinusSign()
+        self.assertEqual(test_gui.get_display_value()[-1],'-')
+
+    def test_input_Mull_sign(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        test_gui.clicked_MulSign()
+        self.assertEqual(test_gui.get_display_value()[-1],'*')
+
+    def test_input_Add_sign(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        test_gui.clicked_DivSign()
+        self.assertEqual(test_gui.get_display_value()[-1],'/')
+
+
+    def test_input_Percent(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        test_gui.clicked_ReminderSign()
+        self.assertEqual(test_gui.get_display_value()[-1],'%')
+
+
+
+
+
+    def test_addition(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        stringEq = '2626346+235235235'
+        test_value = 2626346+235235235
+        test_gui.Display.setText(str(stringEq))
+        test_gui.clicked_equals_sign()
+        self.assertEqual(test_gui.get_display_value(),str(test_value))
+        
+
+
+    def test_substraction(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        stringEq = '2626346-235235235'
+        test_value = 2626346-235235235
+        test_gui.Display.setText(str(stringEq))
+        test_gui.clicked_equals_sign()
+        self.assertEqual(test_gui.get_display_value(),str(test_value))
+
+    def test_multiplication(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        stringEq = '34*254'
+        test_value = 34*254
+        test_gui.Display.setText(str(stringEq))
+        test_gui.clicked_equals_sign()
+        self.assertEqual(test_gui.get_display_value(),str(test_value))
+
+    def test_division(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        stringEq = '34/25'
+        test_value = 34/25
+        test_gui.Display.setText(str(stringEq))
+        test_gui.clicked_equals_sign()
+        self.assertEqual(test_gui.get_display_value(),str(test_value))
+
+    def test_division_error(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        stringEq = '34/0'
+      
+        test_gui.Display.setText(str(stringEq))
+        test_gui.clicked_equals_sign()
+        self.assertEqual(test_gui.get_display_value(),'')
+
+    def test_brackets(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        stringEq = '(2+2)*2+3'
+        testValue = (2+2)*2+3
+        test_gui.Display.setText(str(stringEq))
+        test_gui.clicked_equals_sign()
+        self.assertEqual(test_gui.get_display_value(),str(testValue))
+
+
+    def test_leftShift(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        stringEq = '8<<2'
+        testValue = 8<<2
+        test_gui.Display.setText(str(stringEq))
+        test_gui.clicked_equals_sign()
+        self.assertEqual(test_gui.get_display_value(),str(testValue))
+
+    def test_rightShift(self):
+        test_gui  = calc_gui.Ui_MainWindow()
+        window = calc_gui.QtWidgets.QMainWindow()
+        test_gui.setupUi(window)
+        stringEq = '8>>2'
+        testValue = 8>>2
+        test_gui.Display.setText(str(stringEq))
+        test_gui.clicked_equals_sign()
+        self.assertEqual(test_gui.get_display_value(),str(testValue))
 
 
 

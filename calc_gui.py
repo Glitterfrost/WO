@@ -161,7 +161,7 @@ class Ui_MainWindow(object):
         self.bg.addButton(self.checkBox_DEC,3)
         self.bg.addButton(self.checkBox_HEX,4)
 
-
+        self.memory=''
 
 
         self.bg.buttonClicked.connect(self.slot)
@@ -256,7 +256,6 @@ class Ui_MainWindow(object):
 
     
     def clicked_0(self):
-        
         self.Display.setText(self.get_display_value()+'0')
     def clicked_1(self):
         self.Display.setText(self.get_display_value()+'1')
@@ -276,6 +275,19 @@ class Ui_MainWindow(object):
         self.Display.setText(self.get_display_value()+'8')
     def clicked_9(self):
         self.Display.setText(self.get_display_value()+'9')
+    def clicked_A(self):
+        self.Display.setText(self.get_display_value()+'A')
+    def clicked_B(self):
+        self.Display.setText(self.get_display_value()+'B')
+    def clicked_C(self):
+        self.Display.setText(self.get_display_value()+'C')
+    def clicked_D(self):
+        self.Display.setText(self.get_display_value()+'D')
+    def clicked_E(self):
+        self.Display.setText(self.get_display_value()+'E')
+    def clicked_F(self):
+        self.Display.setText(self.get_display_value()+'F')
+
 
     def clicked_Clear(self):
         self.Display.setText('')
@@ -283,9 +295,44 @@ class Ui_MainWindow(object):
     def clicked_Del(self):
         self.Display.setText(self.get_display_value()[:-1])
 
+    def clicked_left_bracket(self):
+        self.Display.setText(self.get_display_value()+'(')
 
+    def clicked_right_bracket(self):
+        self.Display.setText(self.get_display_value()+')')
 
+    def clicked_sign_change(self):
+        if self.get_display_value() =='':
+            self.Display.setText('-')
+        elif self.get_display_value()[0]!='-':
+            self.Display.setText('-'+self.get_display_value())
+        else:
+            self.Display.setText(self.get_display_value()[1:])
 
+    def clicked_AddSign(self):
+        self.Display.setText(self.get_display_value()+'+')
+    def clicked_MinusSign(self):
+        self.Display.setText(self.get_display_value()+'-')
+
+    def clicked_MulSign(self):
+        self.Display.setText(self.get_display_value()+'*')
+
+    def clicked_DivSign(self):
+        self.Display.setText(self.get_display_value()+'/')
+
+    def clicked_ReminderSign(self):
+        self.Display.setText(self.get_display_value()+'%')
+    def clicked_leftShift(self):
+        self.Display.setText(self.get_display_value()+'<<')
+
+    def clicked_rightShift(self):
+        self.Display.setText(self.get_display_value()+'>>')
+
+    def clicked_equals_sign(self):
+        try:
+            self.Display.setText(str(eval(self.get_display_value())))
+        except ZeroDivisionError:
+            self.Display.setText('')
     def connect_buttons(self):
         self.pushButton_0.clicked.connect(self.clicked_0)
         self.pushButton_1.clicked.connect(self.clicked_1)
@@ -299,6 +346,27 @@ class Ui_MainWindow(object):
         self.pushButton_9.clicked.connect(self.clicked_9)
         self.pushButton_Clear.clicked.connect(self.clicked_Clear)
         self.pushButton_Del.clicked.connect(self.clicked_Del)
+        self.pushButton_leftBracket.clicked.connect(self.clicked_left_bracket)
+        self.pushButton_rightBracket.clicked.connect(self.clicked_right_bracket)
+        self.pushButton_sign.clicked.connect(self.clicked_sign_change)
+        self.pushButton_Add.clicked.connect(self.clicked_AddSign)
+        self.pushButton_Substract.clicked.connect(self.clicked_MinusSign)
+        self.pushButton_Mulitply.clicked.connect(self.clicked_MulSign)
+        self.pushButton_Divide.clicked.connect(self.clicked_DivSign)
+        self.pushButton_equal.clicked.connect(self.clicked_equals_sign)
+        self.pushButton_perCent.clicked.connect(self.clicked_ReminderSign)
+        self.pushButton_leftShift.clicked.connect(self.clicked_leftShift)
+        self.pushButton_rightShift.clicked.connect(self.clicked_rightShift)
+        self.pushButton_A.clicked.connect(self.clicked_A)
+        self.pushButton_B.clicked.connect(self.clicked_B)
+        self.pushButton_C.clicked.connect(self.clicked_C)
+        self.pushButton_D.clicked.connect(self.clicked_D)
+        self.pushButton_E.clicked.connect(self.clicked_E)
+        self.pushButton_F.clicked.connect(self.clicked_F)
+        
+
+
+
     def retranslateUi(self,MainWindow):
 
         _translate = QtCore.QCoreApplication.translate
