@@ -22,6 +22,6 @@ steps:
     pip install pyqt5
   displayName: 'Installing pyqt5'
 - script: |
-    python -m unittest test_calculator.Test_calculator
+    python -m unittest test_calculator.TestCalculator
   displayName: 'Basic unit tests'
 
