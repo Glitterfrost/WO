@@ -452,4 +452,4 @@ if __name__ == '__main__':
     window = QtWidgets.QMainWindow()
     ex.setupUi(window)
     window.show()
-    sys.exit(app.exec_())
+    app.quit()
