@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'windows-latest'
 strategy:
   matrix:
     Python37:
@@ -18,10 +18,6 @@ steps:
   inputs:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
-- script: |
-    sudo apt-get install libxcb-xinerama0;
-    
-  displayName: 'Installing neccesary extensions'
 
 - script: |
     pip install pyqt5
