@@ -18,7 +18,7 @@ steps:
   inputs:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
-- scirpt: |
+- script: |
     sudo apt-get install libxkbcommon-x11-0
   displayName: 'Installing neccesary extensions'
 
