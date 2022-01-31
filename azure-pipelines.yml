@@ -22,7 +22,13 @@ steps:
 - script: |
     pip install pyqt5
   displayName: 'Installing pyqt5'
+# - script: |
+#     python -m unittest test_calculator.TestCalculator
+#   displayName: 'Basic unit tests'
+
 - script: |
-    python -m unittest test_calculator.TestCalculator
-  displayName: 'Basic unit tests'
+    pip install pytest pytest-azurepipelines
+    pip install pytest-cov
+    pytest --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml
+  displayName: 'pytest'
 
