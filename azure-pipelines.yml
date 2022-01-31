@@ -6,33 +6,42 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'windows-latest'
-strategy:
-  matrix:
-    Python37:
-      python.version: '3.9'
+stages:
+- stage: 'Build'
+  displayName: 'Build the application'
+  jobs:
+  - job: 'Build'
+  pool:
+      vmImage: 'windows-latest'
 
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+    displayName: 'Use Python $(python.version)'
+  - script: |
+      pip install pyqt5
+    displayName: 'Installing pyqt5'
+  - script: |
+      python calc_gui.py
+    displayName: 'Compiling application'
 
-- script: |
-    pip install pyqt5
-  displayName: 'Installing pyqt5'
-# - script: |
-#     python -m unittest test_calculator.TestCalculator
-#   displayName: 'Basic unit tests'
-- script: |
+ stage: 'Test'
+  displayName: 'Test the application'
+  jobs:
+  - job: 'Test'
+  pool:
+      vmImage: 'windows-latest'
+
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+    displayName: 'Use Python $(python.version)'
+  - script: |
+      pip install pyqt5
+    displayName: 'Installing pyqt5'
+  - script: |
     pip install pytest pytest-azurepipelines
-    pip install pytest-cov
     pytest
   displayName: 'pytest'
-# - script: |
-#     pip install pytest pytest-azurepipelines
-#     pip install pytest-cov
-#     pytest --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml
-#   displayName: 'pytest'
-
