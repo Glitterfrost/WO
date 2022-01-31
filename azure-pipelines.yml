@@ -18,6 +18,7 @@ steps:
   inputs:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
+- script: |
+    python -m unittest test_calculator.Test_calculator
+  displayName: 'Basic unit tests'
 
-- script: pip install pytest pytest-azurepipelines
-  displayName: 'pytest'
