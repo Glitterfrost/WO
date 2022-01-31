@@ -26,7 +26,7 @@ stages:
       python calc_gui.py
     displayName: 'Compiling application'
 
- stage: 'Test'
+- stage: 'Test'
   displayName: 'Test the application'
   jobs:
   - job: 'Test'
@@ -42,6 +42,6 @@ stages:
       pip install pyqt5
     displayName: 'Installing pyqt5'
   - script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+      pip install pytest pytest-azurepipelines
+      pytest
+    displayName: 'pytest'
