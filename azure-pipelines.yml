@@ -19,7 +19,10 @@ steps:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
 - script: |
-    sudo apt-get install libxkbcommon-x11-0
+    sudo apt-get install libxkbcommon-x11-0;
+    sudo apt-get install build-essential;
+    sudo apt-get install qtcreator;
+    sudo apt-get install qt5-default;
   displayName: 'Installing neccesary extensions'
 
 - script: |
