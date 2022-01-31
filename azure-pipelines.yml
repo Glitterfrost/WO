@@ -19,6 +19,9 @@ steps:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
 - script: |
+    pip install pyqt5
+  displayName: 'Installing pyqt5'
+- script: |
     python -m unittest test_calculator.Test_calculator
   displayName: 'Basic unit tests'
 
