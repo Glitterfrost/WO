@@ -18,6 +18,10 @@ steps:
   inputs:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
+- scirpt: |
+    sudo apt-get install libxkbcommon-x11-0
+  displayName: 'Installing neccesary extensions'
+
 - script: |
     pip install pyqt5
   displayName: 'Installing pyqt5'
