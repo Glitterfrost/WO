@@ -11,7 +11,7 @@ stages:
   displayName: 'Build the application'
   jobs:
   - job: 'Build'
-  pool:
+    pool:
       vmImage: 'windows-latest'
 
     steps:
@@ -30,7 +30,7 @@ stages:
   displayName: 'Test the application'
   jobs:
   - job: 'Test'
-  pool:
+    pool:
       vmImage: 'windows-latest'
 
     steps:
