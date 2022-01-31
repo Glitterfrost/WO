@@ -14,17 +14,17 @@ stages:
   pool:
       vmImage: 'windows-latest'
 
-  steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '$(python.version)'
-    displayName: 'Use Python $(python.version)'
-  - script: |
-      pip install pyqt5
-    displayName: 'Installing pyqt5'
-  - script: |
-      python calc_gui.py
-    displayName: 'Compiling application'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '$(python.version)'
+      displayName: 'Use Python $(python.version)'
+    - script: |
+        pip install pyqt5
+      displayName: 'Installing pyqt5'
+    - script: |
+        python calc_gui.py
+      displayName: 'Compiling application'
 
 - stage: 'Test'
   displayName: 'Test the application'
@@ -33,15 +33,15 @@ stages:
   pool:
       vmImage: 'windows-latest'
 
-  steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '$(python.version)'
-    displayName: 'Use Python $(python.version)'
-  - script: |
-      pip install pyqt5
-    displayName: 'Installing pyqt5'
-  - script: |
-      pip install pytest pytest-azurepipelines
-      pytest
-    displayName: 'pytest'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '$(python.version)'
+      displayName: 'Use Python $(python.version)'
+    - script: |
+        pip install pyqt5
+      displayName: 'Installing pyqt5'
+    - script: |
+        pip install pytest pytest-azurepipelines
+        pytest
+      displayName: 'pytest'
